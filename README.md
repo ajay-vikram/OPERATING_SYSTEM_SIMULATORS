@@ -16,6 +16,5 @@
 
 Ajay Vikram P - ajayvikramp@gmail.com
 
-Project Link: (https://ajay-vikram.github.io/OPERATING_SYSTEM_SIMULATOR/index.html)
+Project Link: (https://ajay-vikram.github.io/OPERATING_SYSTEM_SIMULATOR/)
 
-My Contribution : (https://ajay-vikram.github.io/OPERATING_SYSTEM_SIMULATOR/page_replacement)
