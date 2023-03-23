@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>Disk Scheduling Simulator</title>
+  </head>
+  <body>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <figure class="text-center">
+    <div class="p-3 mb-2 bg-light text-dark">
+    <h1>Disk Scheduling Algorithms</h1>
+    </div>
+    <br>
+    <p class="fs-5">Enter the I/O request sequence </p>
+    <input type="text" id="ele" placeholder="I/O Sequence" required>
+    <br>
+    <br>
+    <p class="fs-5">Enter the position of the head</p>
+    <input type="text" id="head" placeholder="Head Position" required>
+    <br>
+    <br>
+    <p class="fs-5">Enter the maximum value in the tracks </p>
+    <input type="text" id="max" placeholder="Maximum Value" required>
+    <br>
+    <br>
+    <p class="fs-5">Enter the minimum value in the tracks </p>
+    <input type="text" id="min" placeholder="Minimum Value" required>
+    <br>
+    <br>
+    <input id="Button1" class="btn btn-primary btn-lg" type="button" value="Submit" onclick="func()"/>
+    <br>
+    <br>
+    <input id="Button2" class="btn btn-success btn-sm" type="button" value="Reset" onclick="reset()"/>
+    <br>
+    <br>
+    <p>FCFS</p>
+    <table class="table" id="tb1"></table>
+    <br>
+    <br>
+    <p>SSTF</p>
+    <table class="table" id="tb2"></table>
+    <br>
+    <br> 
+    <p>SCAN</p>
+    <table class="table" id="tb3"></table>
+    <br>
+    <br>
+    <p>CSCAN</p>
+    <table class="table" id="tb4"></table>
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    <p>The x-axis and y-axis shows the time taken and locations in the disk respectively. Yellow, green, blue and red curves denote FCFS, SRTF, SCAN and CSCAN respectively. </p>
+    <p>Please note that the curves may overlap resulting in the colours being superimposed on each other especially when the request sequence is small. To see invisible curves hover the mouse over various points of the visible curves</p>
+    </figure>
+    <script>
+
+        function func() 
+        {
+            document.getElementById("Button1").disabled = true;
+            var InputString = document.getElementById('ele').value;
+            var a = new Array();
+            a = InputString.split(' ').map(Number);
+            n = a.length;
+            var h = document.getElementById('head').value;
+            var max = document.getElementById('max').value;
+            var min = document.getElementById('min').value;
+            
+            var table = document.getElementById("tb1");
+            var row = table.insertRow(0);
+            var cell = row.insertCell(0);
+            cell.innerHTML = "<b>Header movement from</b>";
+            cell = row.insertCell(1);
+            cell.innerHTML = "<b>Header movement to</b>";
+            cell = row.insertCell(2);
+            cell.innerHTML = "<b>Cumulative Seek Time</b>";
+            var r1;
+            {
+                var st=0, k=0;
+                r1=2;
+                row = table.insertRow(1);
+                cell = row.insertCell(0);
+                cell.innerHTML = h;
+                cell = row.insertCell(1);
+                cell.innerHTML = a[k];
+                st=Math.abs(h-a[k]);
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                for(var i=k+1; i<n; i++)
+                {
+                    row = table.insertRow(r1++);
+                    st+=Math.abs(a[i]-a[i-1]);
+                    cell = row.insertCell(0);
+                    cell.innerHTML = a[i-1];
+                    cell = row.insertCell(1);
+                    cell.innerHTML = a[i];
+                    cell = row.insertCell(2);
+                    cell.innerHTML = st;
+                }
+            }
+
+            var table2 = document.getElementById("tb2");
+            var row = table2.insertRow(0);
+            var cell = row.insertCell(0);
+            cell.innerHTML = "<b>Header movement from</b>";
+            cell = row.insertCell(1);
+            cell.innerHTML = "<b>Header movement to</b>";
+            cell = row.insertCell(2);
+            cell.innerHTML = "<b>Cumulative Seek Time</b>";
+            var r2=1, h1=h;
+            var b=[]
+            for (var i of a)
+              b.push(i)
+            {
+              var st=0, k=0, small, small_i;
+              for(var i=0; i<n; i++)
+              {
+                small=Number.MAX_VALUE;
+                for(var j=0; j<n; j++)
+                if(small>Math.abs(h1-b[j]))
+                {
+                  small=Math.abs(h1-b[j]);
+                  small_i=j;
+                }
+                st+=Math.abs(h1-b[small_i]);
+                row = table2.insertRow(r2++);
+                cell = row.insertCell(0);
+                cell.innerHTML = h1;
+                cell = row.insertCell(1);
+                cell.innerHTML = b[small_i];
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                h1=b[small_i];
+                b[small_i]=Number.MAX_VALUE;
+                }
+            } 
+
+            var table3 = document.getElementById("tb3");
+            var row = table3.insertRow(0);
+            var cell = row.insertCell(0);
+            cell.innerHTML = "<b>Header movement from</b>";
+            cell = row.insertCell(1);
+            cell.innerHTML = "<b>Header movement to</b>";
+            cell = row.insertCell(2);
+            cell.innerHTML = "<b>Cumulative Seek Time</b>";
+            var r3=1;
+            {
+              var st=0, k=0;
+              while(h==a[k])
+              {
+                k++;
+                row = table3.insertRow(r3++);
+                cell = row.insertCell(0);
+                cell.innerHTML = h;
+                cell = row.insertCell(1);
+                cell.innerHTML = h;
+                cell = row.insertCell(2);
+                cell.innerHTML = 0;
+              }
+              if(k>=n)
+                return;
+              if(h<a[k])
+              {
+                row = table3.insertRow(r3++);
+                cell = row.insertCell(0);
+                cell.innerHTML = h;
+                cell = row.insertCell(1);
+                cell.innerHTML = max;
+                st=max-h;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                var small=a[k];
+                for(var i=k; i<n; i++)
+                  if(small>a[i])
+                    small=a[i];
+                if(small<h)
+                {
+                  st+=(max-small);
+                  row = table3.insertRow(r3++);
+                  cell = row.insertCell(0);
+                  cell.innerHTML = max;
+                  cell = row.insertCell(1);
+                  cell.innerHTML = small;
+                  cell = row.insertCell(2);
+                  cell.innerHTML = st;
+                }
+              } 
+              else
+              {
+                st=h-min;
+                row = table3.insertRow(r3++);
+                cell = row.insertCell(0);
+                cell.innerHTML = h;
+                cell = row.insertCell(1);
+                cell.innerHTML = min;
+                st=h-min;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                var large=a[k];
+                for(var i=k; i<n; i++)
+                  if(large<a[i])
+                    large=a[i];
+                if(large>h)
+                {
+                  st+=(large-min);
+                  row = table3.insertRow(r3++);
+                  cell = row.insertCell(0);
+                  cell.innerHTML = min;
+                  cell = row.insertCell(1);
+                  cell.innerHTML = large;
+                  cell = row.insertCell(2);
+                  cell.innerHTML = st;
+                }
+              }
+            } 
+
+            var table4 = document.getElementById("tb4");
+            var row = table4.insertRow(0);
+            var cell = row.insertCell(0);
+            cell.innerHTML = "<b>Header movement from</b>";
+            cell = row.insertCell(1);
+            cell.innerHTML = "<b>Header movement to</b>";
+            cell = row.insertCell(2);
+            cell.innerHTML = "<b>Cumulative Seek Time</b>";
+            var r4=1;
+            {
+              var st=0, k=0;
+              while(h==a[k])
+              {
+                k++;
+                row = table4.insertRow(r4++);
+                cell = row.insertCell(0);
+                cell.innerHTML = h;
+                cell = row.insertCell(1);
+                cell.innerHTML = h;
+                cell = row.insertCell(2);
+                cell.innerHTML = 0;
+              }
+              if(k>=n)
+                return;
+              if(h<a[k])
+              {
+                var small=-1;                                              //Small stores the largest value smaller than head
+                st=max-h;
+                row = table4.insertRow(r4++);
+                cell = row.insertCell(0);
+                cell.innerHTML = h;
+                cell = row.insertCell(1);
+                cell.innerHTML = max;
+                st=max-h;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                for(var i=k; i<n; i++)
+              if(a[i]<h)
+              {
+                small=a[i];
+                st+=(max-min);
+                row = table4.insertRow(r4++);
+                cell = row.insertCell(0);
+                cell.innerHTML = max;
+                cell = row.insertCell(1);
+                cell.innerHTML = min;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                break;
+              }
+              for(var i=k; i<n; i++)
+                if(small<a[i]&&a[i]<h)
+                  small=a[i];
+              if(small!=-1)
+              {
+                st+=(small-min);
+                row = table4.insertRow(r4++);
+                cell = row.insertCell(0);
+                cell.innerHTML = min;
+                cell = row.insertCell(1);
+                cell.innerHTML = small;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+              }
+            }
+            else
+            {
+              var large=-1;                                               //Large stores smallest element larger than head
+              st=h-min;
+              row = table4.insertRow(1);
+              cell = row.insertCell(0);
+              cell.innerHTML = h;
+              cell = row.insertCell(1);
+              cell.innerHTML = min;
+              cell = row.insertCell(2);
+              cell.innerHTML = st;
+              for(var i=k; i<n; i++)
+              if(a[i]>h)
+              {
+                large=a[i];
+                st+=(max-min);
+                row = table4.insertRow(r4++);
+                cell = row.insertCell(0);
+                cell.innerHTML = min;
+                cell = row.insertCell(1);
+                cell.innerHTML = max;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+                break;
+              }
+              for(var i=k; i<n; i++)
+                if(large>a[i]&&a[i]>h)
+                  large=a[i];
+              if(large!=-1)
+              {
+                st+=(large-min);
+                row = table4.insertRow(1);
+                cell = row.insertCell(0);
+                cell.innerHTML = min;
+                cell = row.insertCell(1);
+                cell.innerHTML = large;
+                cell = row.insertCell(2);
+                cell.innerHTML = st;
+              }
+            } 
+          }
+          var w=Math.floor((max-min)/10);
+          var xValues=[];
+          for(var i=0; i<11; i++)
+            xValues[i]=min+w*i;
+          var d1=[], d2=[], d3=[], d4=[]
+          for(var i=0; i<r1-1; i++)
+            d1[i]=table.rows[i+1].cells[0].innerHTML;
+          d1[i]=table.rows[r1-1].cells[1].innerHTML;
+          
+          for(var i=0; i<r2-1; i++)
+            d2[i]=table2.rows[i+1].cells[0].innerHTML;
+          d2[i]=table2.rows[r2-1].cells[1].innerHTML;
+          
+          for(var i=0; i<r3-1; i++)
+            d3[i]=table3.rows[i+1].cells[0].innerHTML;
+          d3[i]=table3.rows[r3-1].cells[1].innerHTML;
+
+          for(var i=0; i<r4-1; i++)
+            d4[i]=table4.rows[i+1].cells[0].innerHTML;
+          d4[i]=table4.rows[r4-1].cells[1].innerHTML;
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      data: d1,
+      borderColor: "yellow",
+      fill: false
+    },{
+      data: d2,
+      borderColor: "green",
+      fill: false
+    },{
+      data: d3,
+      borderColor: "blue",
+      fill: false
+    },{
+      data: d4,
+      borderColor: "red",
+      fill: false
+    }]
+  },
+  options: {
+    legend: {display: false}
+  }
+});
+        }
+
+        function reset()
+        {
+          location.reload();
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>

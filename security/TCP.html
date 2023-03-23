@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<style>
+  #container {
+    width: 943px;
+    height: 5px;
+    position: absolute;
+    background: white;
+    /* border: #000 solid; */
+    top: 108%;
+    left: 18%;
+  }
+  #animate {
+    width: 50px;
+    height: 5px;
+    position: absolute;
+    border: #000;
+    top: 0%;
+    left: 0%;
+    opacity: 0;
+  }
+</style>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/stroke.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/prettyPhoto.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/style.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/js/syntax-highlighter/styles/shCore.css" media="all">
+  <link rel="stylesheet" type="text/css" href="wikipages/js/syntax-highlighter/styles/shThemeRDark.css" media="all">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/custom.css">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <div style="background-color:#cabbe9;" class="container-fluid">
+      <div class="panel panel-primary">
+        <div style="background-color:#8b85e9; text-align: center;" class="panel panel-heading">
+          <h1>TCP Simulation</h1>
+        </div>
+        <div class="panel panel-body">
+          <button class="btn btn-primary" type ="button", onclick ="socket()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1">socket()</button> The socket() function is used to create an unbound socket in a communications domain. It takes three arguments: the address family of the socket to be created, the type of socket to be created, and the protocol to be used with the socket. This returns a file descriptor that can be used in later function calls that operate on sockets.  
+          <br/><br/>
+          <button id  = "bind" class="btn btn-primary" type ="button", onclick ="bind()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>bind()</button> The bind() function binds a unique local name to the socket with descriptor socket. After calling socket(), a descriptor does not have a name associated with it. However, it does belong to a particular address family as specified when socket() is called. The exact format of a name depends on the address family.
+          <br/><br/>
+          <button id ="listen" class="btn btn-primary" type ="button", onclick ="listen()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>listen()</button> The listen() function applies only to stream sockets. It indicates a readiness to accept client connection requests, and creates a connection request queue of length backlog to queue incoming connection requests.
+          <br/><br/>
+          <button id ="connect" class="btn btn-primary" type ="button", onclick ="connect()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>connect()</button> The connect function is used to create a connection to the specified destination. If socket s, is unbound, unique values are assigned to the local association by the system, and the socket is marked as bound.
+          <br/><br/>
+          <button id  ="accept"  class="btn btn-primary" type ="button", onclick ="accept()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>accept()</button> The accept() call is used by a server to accept a connection request from a client. When a connection is available, the socket created is ready for use to read data from the process that requested the connection. The call accepts the first connection on its queue of pending connections for the given socket socket.
+          <br/><br/>
+          <button id ="move" class="btn btn-primary" type ="button", onclick ="myMove()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>send()</button> This function sends a message on a socket
+          <br/><br/>
+          <button id ="close" class="btn btn-primary" type ="button", onclick ="closee()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>close</button> The close function shuts down the socket associated with socket descriptor s, and frees resources allocated to the socket. If s refers to an open TCP connection, the connection is closed. If a stream socket is closed when there is input data queued, the TCP connection is reset rather than being cleanly closed.
+        </div>
+      </div>
+    <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:100%;left:10%;border-radius:125px;border:1px solid #000"><b>Server</b></button>
+    <button type = "button", id ="client", name = "client", style="  height:125px;width:125px;position:absolute;top:100%;left:80%;border-radius:125px;border:1px solid #000"><b>Client</b></button>
+
+    <button type = "button", id ="one", name = "one", style="height:30px;width:30px;position:absolute;top:101%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="two", name = "two", style="height:30px;width:30px;position:absolute;top:106%;left:19%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="three", name = "three", style="height:30px;width:30px;position:absolute;top:111%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="four", name = "four", style="height:30px;width:30px;position:absolute;top:97%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="five", name = "five", style="height:30px;width:30px;position:absolute;top:106%;left:22%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="six", name = "six", style="height:30px;width:30px;position:absolute;top:115%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="connection", name = "connection", style="height:5px;width:953px;position:absolute;top:108%;left:18%;background-color:white;border:1px solid #FFFFFF"> </button>
+
+    <div id ="container">
+      <div id ="animate"></div>
+    </div>
+
+    <script type ="text/javascript">
+      function socket()
+      {
+        document.getElementById("server").style.backgroundColor = '#58efd6';
+        document.getElementById("client").style.backgroundColor = '#58efd6';
+        document.getElementById("bind").disabled = false;
+      }
+
+      function bind()
+      {
+        document.getElementById("server").style.backgroundColor = '#FA6937 ';
+        document.getElementById("listen").disabled = false;
+      }
+
+      function listen()
+      {
+        document.getElementById("one").style.backgroundColor = '#58efd6';
+        document.getElementById("two").style.backgroundColor = '#58efd6';
+        document.getElementById("three").style.backgroundColor = '#58efd6';
+        document.getElementById("four").style.backgroundColor = '#58efd6';
+        document.getElementById("five").style.backgroundColor = '#58efd6';
+        document.getElementById("six").style.backgroundColor = '#58efd6';
+        document.getElementById("connect").disabled = false;
+      }
+
+      function connect()
+      {
+        //document.getElementById("connection").style.border = '1px solid #000000';
+        document.getElementById("container").style.border = '1px solid #000000';
+        document.getElementById("accept").disabled = false;
+        document.getElementById("close").disabled = false;
+      }
+
+      function accept()
+      {
+        //document.getElementById("connection").style.backgroundColor = '#00FF00';
+        document.getElementById("container").style.backgroundColor = '#00FF00';
+        document.getElementById("move").disabled = false;
+      }
+
+      function myMove() 
+      {
+        document.getElementById("animate").style.backgroundColor = '#FA6937';
+        document.getElementById("animate").style.opacity = "1.0";
+        var elem = document.getElementById("animate");
+        var pos = 0;
+        var id = setInterval(frame, 5);
+        function frame() {
+          if (pos == 893) {
+            clearInterval(id);
+          } else {
+            pos++;
+            elem.style.left = pos + 'px';
+          }
+        }
+      }
+
+      function closee()
+      {
+        document.getElementById("animate").style.backgroundColor = '#FFFFFF'
+        document.getElementById("server").style.backgroundColor = '#DCDCDC'
+        document.getElementById("client").style.backgroundColor = '#DCDCDC';
+
+        document.getElementById("one").style.backgroundColor = '#FFFFFF';
+        document.getElementById("two").style.backgroundColor = '#FFFFFF';
+        document.getElementById("three").style.backgroundColor = '#FFFFFF';
+        document.getElementById("four").style.backgroundColor = '#FFFFFF';
+        document.getElementById("five").style.backgroundColor = '#FFFFFF';
+        document.getElementById("six").style.backgroundColor = '#FFFFFF';
+
+        document.getElementById("container").style.backgroundColor = '#FFFFFF';
+        document.getElementById("container").style.border = '1px solid #FFFFFF';
+
+        document.getElementById("bind").disabled = true;
+        document.getElementById("listen").disabled = true;
+        document.getElementById("connect").disabled = true;
+        document.getElementById("accept").disabled = true;
+        document.getElementById("move").disabled = true;
+        document.getElementById("close").disabled = true;
+      }
+    </script>
+  </div>
+</body>

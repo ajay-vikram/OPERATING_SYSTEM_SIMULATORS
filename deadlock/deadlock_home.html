@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>OS Simulator</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: BizLand - v3.7.0
+  * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a
+            href="mailto:contact@example.com">csteam2024batch@nitk.edu.in</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span></span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo">OS Simulator<span>.</span></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="../index.html" class="logo"><img src="../assets/img/logo.png" alt=""></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="../index.html">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto " href="#faq">F.A.Q</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+      <h1>Welcome to <span>Deadlock Algorithms</span></h1>
+      <h2><b>Theory as well as a simulation to explain the need for Deadlock avoidance and prevention algorithms in the
+          OS</b></h2>
+      <div class="d-flex">
+        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <!-- <a href="https://www.youtube.com/watch?v=6bXaiR2aAxA" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <section id="about" class="about section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About topic</h2>
+          <h3>Know <span>About topic</span></h3>
+          <p>Deadlock Algorithms</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up"
+            data-aos-delay="100">
+            <h3>Banker's Algorithm</h3>
+            <ul>
+              <li>
+                <i class="bx bx-store-alt"></i>
+                <div>
+                  <h5>Banker's Algorithm</h5>
+                  <p>Banker’s algorithm is named so because it is used in banking system to check whether loan can be
+                    sanctioned to a person or not. The bank would never allocate its money in such a way that it can no
+                    longer satisfy the needs of all its customers. The bank would try to be in safe state always.</p>
+
+                </div>
+              </li>
+              <li>
+                <i class="bx bx-images"></i>
+                <div>
+                  <h5>Safety Algorithm:</h5>
+                  <p>This algorithm is used to find out if the system is in a safe state. A safe state is a state where
+                    all the pending processes can be executed without leading to a deadlock of resources.</p>
+                </div>
+              </li>
+              <li>
+                <i class="bx bx-images"></i>
+                <div>
+                  <h5>Resource Requesting Algorithm</h5>
+                  <p>This algorithm is used to determine if the request of a program to allocate more resources should
+                    be granted. Here we simulate the granting of resources and then check if system is in safe state
+                    using the safety algorithm. Only if it is in a safe state we allocate resources.</p>
+                </div>
+              </li>
+              <li>
+                <i class="bx bx-images"></i>
+                <div>
+                  <h5>The Simulation</h5>
+                  <p>First the number of programs and the number of resources are specified. Then the respective fields for each program must be filled. The allocation and need values are automatically entered into the table. After entering all values, the user can click either the safety algorithm, which tells if the system is in a safe state or the resource allocation algorithm which calculates whether the request of a program for resource can be made without resulting in deadlock.</p>
+                </div>
+              </li>
+              
+            </ul>
+            <button
+              style="width:100px; background-color: rgb(14, 188, 171); height: 40px; border-radius: 5px; color: aliceblue; font-weight: 400 bold;"><a
+                href="bankers.html">Simulation</a></button>
+          </div>
+        </div>
+        <br>
+                <br>
+                <br>
+        <div class="row">
+          
+                <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up"
+                data-aos-delay="100">
+                <h3>Dining Philosopher's Algorithm</h3>
+                <ul>
+                  <li>
+                    <i class="bx bx-store-alt"></i>
+                    <div>
+                      <h5>What is the Dining Philosopher's problem?</h5>
+                      <p>The Dining Philosopher Problem states that K philosophers seated around a circular table with one chopstick between each pair of philosophers. There is one chopstick between each philosopher. A philosopher may eat if he can pick up the two chopsticks adjacent to him. One chopstick may be picked up by any one of its adjacent followers but not both.</p>
+    
+                    </div>
+                  </li>
+                  <li>
+                    <i class="bx bx-images"></i>
+                    <div>
+                      <h5>The states of a philosopher</h5>
+                      <p>A Philosopher can have 3 states: Think, Hungry and Eat. A thinking philosopher may become hungry and at that time if both chopsticks are available, the philospher will go to the eating state. After eating, the philosopher is back to the thinking state.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <i class="bx bx-images"></i>
+                    <div>
+                      <h5>How is this related to deadlock prevention?</h5>
+                      <p>Dining Philosophers problem represents a possible deadlock scenario. If all philosophers take one chopstick then the system is in a deeadlock. The algorithm can prevent this in 3 ways: Either all philosophers should not be allowed to eat first or a philosopher has to take both chopsticks. He/she can't take only one. The third way is to allocate the first chopstick to the last philosopher instead of the first so that way the last philosopher can always complete eating and release the resources and deadlock is prevented.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <i class="bx bx-images"></i>
+                    <div>
+                      <h5>The Simulation</h5>
+                      <p>The simulation has an option to set the number of philosophers and also the simulation speed. Once the page has loaded, the simulation will automatically start in 3 seconds. Each philosopher acts independently and randomly enters into think, hungry and eat states. The dining philosophers algorithm tries to prevent deadlock in the background by making a philosopher to always take both chopsticks instead of one. Note: A reset button has been included since due to certain characteristics of asynchronous functions in react the simulation might be stuck in an error.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+                <button
+                  style="width:100px; background-color: rgb(14, 188, 171); height: 40px; border-radius: 5px; color: aliceblue; font-weight: 400 bold;"><a
+                    href="dining-philosopher.html">Simulation</a></button>
+          </div>
+        </div>
+
+
+      </div>
+    </section><!-- End About Section -->
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>F.A.Q</h2>
+          <h3>Frequently Asked <span>Questions</span></h3>
+          <p>Questions related to system security</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-xl-10">
+            <ul class="faq-list">
+
+              <li>
+                <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">What is safe state?
+                  <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+                </div>
+                <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                  <p>A safe state is a state where all processes can be executed with the available resources. i.e no
+                    deadlock. The safety sequence is this order of process execution</p>
+                </div>
+              </li>
+
+              <li>
+                <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">What is deadlock? <i
+                    class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+                  <p>Deadlock is a situation where a set of processes are blocked because each process is holding a
+                    resource and waiting for another resource acquired by some other process. </p>
+                </div>
+              </li>
+
+              <li>
+                <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">How to prevent deadlocks?<i
+                    class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+                  <p>This is essentially where bankers algorithm comes in. When a process makes a request for resource
+                    allocation, it always checks if it will lead to a deadlock. If it doesn't, the request is granted
+                    else the process is made to wait</p>
+                </div>
+              </li>
+
+              <li>
+                <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">What happens if there is a
+                  deadlock?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+                  <p>If there is a deadlock, i.e each process is waiting for resources held by the other process, then
+                    process execution comes to a stand still and computer becomes unresonsive.</p>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h4>Join Us For making better Tomorrow </h4>
+            <p>Lets build an advanced Operating System</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>NITK CS Students 2024 Batch<span>.</span></h3>
+            <p>
+              This project is succesfully completed under the valuable guidance of Shashidhar Sir<br>
+            </p>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#about">About Deadlock Algorithms</a></li>
+              <li><a href="../index.html#services">All Topics</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Project done by</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i>191CS248 SHASHANK J BENNEHALLI</li>
+              <li><i class="bx bx-chevron-right"></i>201CS202 ABHISHEK KUMAR SINGH</li>
+              <li><i class="bx bx-chevron-right"></i>201CS203 ADITHYA M S</li>
+              <li><i class="bx bx-chevron-right"></i>201CS204 AJAY VIKRAM P</li>
+              <li><i class="bx bx-chevron-right"></i>201CS205 AKASH PRASAD</li>
+              <li><i class="bx bx-chevron-right"></i>201CS206 AMAN SINGH HADA</li>
+              <li><i class="bx bx-chevron-right"></i>201CS207 AMOGH UMESH</li>
+              <li><i class="bx bx-chevron-right"></i>201CS208 ASHISH BHARATH</li>
+              <li><i class="bx bx-chevron-right"></i>201CS209 ASHWIN SAM JOSEPH</li>
+              <li><i class="bx bx-chevron-right"></i>201CS210 ATTADA RAMPRASAD</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Team 201CS201-201CS210 CSE NITK </span></strong>. All Rights Reserved
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

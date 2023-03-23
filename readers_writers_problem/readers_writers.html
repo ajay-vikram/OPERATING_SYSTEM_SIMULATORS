@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readers-Writers Problem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <style>
+        .db-flex{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 300px;
+            background-color: grey;
+            gap: 0.5em;
+        }
+
+        .buttons-container{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5em;
+        }
+
+        .reader{
+            width: 70px;
+            height: 70px;
+            background-color: green;
+            font-weight: bold;
+        }
+
+        .writer{
+            width: 70px;
+            height: 70px;
+            background-color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <center><h1 class="mt-5 text-decoration-underline">Readers Writers Problem Simulation</h1></center>
+    <div class="mt-5 mb-5 db-flex">
+        
+    </div>
+    <div class="buttons-container">
+        <button type="button" class="btn-success" id="reader-create-btn">CreateReader</button>
+        <button type="button" class="btn-danger" id="writer-create-btn">CreateWriter</button>
+        <button type="button" class="btn-danger" id="reader-destroy-btn">DestroyReader</button>
+        <button type="button" class="btn-success" id="writer-destroy-btn">DestroyWriter</button>
+    </div>
+</body>
+<script>
+    const readers = []
+    const writers = []
+    let t = 0
+    const readerRequests = []
+    const writerRequests = []
+    const readerCreateBtn = document.querySelector('#reader-create-btn')
+    const writerCreateBtn = document.querySelector('#writer-create-btn')
+    const readerDestroyBtn = document.querySelector('#reader-destroy-btn')
+    const writerDestroyBtn = document.querySelector('#writer-destroy-btn')
+
+    const dbFlex = document.querySelector('.db-flex')
+    
+    function createReader()
+    {
+        if(writers.length)
+        {
+            alert("Reader is in waiting mode as there is a writer in the Database")
+            readerRequests.push(t++)
+        }
+        else
+        {
+            readers.push(0)
+            dbFlex.innerHTML += `<div class="reader">Reader</div>`
+        }
+    }
+
+    function createWriter()
+    {
+        if(writers.length || readers.length)
+        {
+            alert("Writer is in waiting mode as there is a reader in the Database")
+            writerRequests.push(t++)
+        }
+        else
+        {
+            writers.push(0)
+            dbFlex.innerHTML += `<div class="writer">Writer</div>`
+        }
+    }
+
+        readerCreateBtn.addEventListener('click', createReader)
+
+        writerCreateBtn.addEventListener("click", createWriter)
+
+        readerDestroyBtn.addEventListener('click', () => {
+
+            if(readers.length === 0)
+            {
+                alert("There are no readers left. So cannot remove.")
+                return
+            }
+
+            document.querySelector(".reader").remove()
+            readers.pop()
+
+            if(!writers.length)
+            {   
+                if(!readers.length)
+                {   
+                    if(writerRequests.length)
+                    {   writerRequests.shift()
+                        writers.push(0)
+                        dbFlex.innerHTML += `<div class="writer">Writer</div>`
+                    }
+                }
+                else
+                {   
+                    while(readerRequests.length)
+                    {
+                        readerRequests.shift()
+                        readers.push(0)
+                        dbFlex.innerHTML += `<div class="reader">Reader</div>`
+                    }
+                }
+            }
+        })
+
+        writerDestroyBtn.addEventListener('click', () => {
+            if(writers.length === 0)
+            {
+                alert("There are no writers left. So cannot remove.")
+                return
+            }
+
+            document.querySelector(".writer").remove()
+            writers.pop()
+
+            if(!writers.length)
+            {   
+                if(!readers.length)
+                {
+                    if(writerRequests.length)
+                    {
+                        writerRequests.shift()
+                        writers.push(0)
+                        dbFlex.innerHTML += `<div class="writer">Writer</div>`
+                    }
+                    else if(readerRequests.length)
+                    {
+                        readerRequests.shift()
+                        readers.push(0)
+                        dbFlex.innerHTML += `<div class="reader">Reader</div>`
+                    }
+                }
+                else
+                {
+                    if(readerRequests.length)
+                    {
+                        readerRequests.shift()
+                        readers.push(0)
+                        dbFlex.innerHTML += `<div class="reader">Reader</div>`
+                    }
+                }
+            }
+        })
+</script>
+</html>

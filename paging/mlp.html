@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multi-level Paging</title>
+	<!--<link rel="stylesheet" type="text/css" href="index.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <style type="text/css">
+    .vertical-center {
+        min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 100vh; /* These two lines are counted as one :-)       */
+        display: flex;
+        align-items: center;
+    }
+    body{
+            background-image: url('Animated_Shape.svg');
+
+            background-attachment: fixed;
+            background-position: center;
+            
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .btn{
+            background-color: aquamarine;
+            color: black;
+            padding: 10px;
+        }
+         .card {
+
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(246, 242, 242, 0.922);
+  transition: 0.3s;
+  width: 60%;
+  text-align: center;
+  margin: auto;
+  background-color: rgba(190, 225, 230, 0.587);
+  background-position: center;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(243, 239, 239, 0.91);
+}
+  </style>
+
+</head>
+<body class="container" style="min-height:100vh">
+
+	  <br><br><br>
+	  <div class="page-header" >
+		 <h1 style="text-align:center;color:white">MULTI-LEVEL PAGING</h1> 
+		    
+	  </div>
+	  <body>
+		<center>	<h1 style="margin-left:20px;color:white"> LOGICAL ADDRESS SPLIT</h1> </center>
+	  <br>
+    <div class="card">
+    <form>
+      <center>
+        <div class="form-group row" style="margin-left:20px;width:25vw;display:block">
+            <input type = "number" id="virtualaddress" class="form-control" placeholder="Enter the virtual address (bits):"/ required>
+        </div>
+        <div class="form-group row" style="margin-left:20px;width:25vw;display:block">
+            <input type = "number" id="page" class="form-control" placeholder="Enter the Page size (Numeric):" required>
+        </div>
+        <div class="form-group row" style="margin-left:20px;width:25vw;display:block">
+            <input type = "text" id="ps" class="form-control" placeholder="Enter the unit of Page size:" required>  
+        </div>
+        <div class="form-group row" style="margin-left:20px;width:25vw;display:block">
+            <input type = "number" id="pte" class="form-control" placeholder="Enter page table entry size:" required>
+        </div>   
+        <div class="form-group row">
+            <input type = "button" id ="btn" class="btn btn-danger btn-lg" style="margin-left:35px;" onclick = "mlp()" value = "Compute">  
+        </div>
+        </center>
+        
+        <p id="demo" align="center"></p>
+        <div id="mydiv" class="table-responsive" style="width:80vw;margin:auto;text-align:center"></div>
+        <p id="demo" align="center"></p>
+    </form>
+    </div>
+    
+</body>
+ <!-- <script type="text/javascript" src="index.js"></script> -->
+</html>
+
+<script>
+function mlp(){
+    var va= parseInt(document.getElementById("virtualaddress").value);
+    $("#demo").append("<b>Virtual Adress is:</b>"+"  "+"<b>"+va+"</b>");
+    //Virtual Address is:
+    console.log(va);
+	var vas = Math.pow (2,va);
+    //Virtual Address space is:
+    $("#demo").append("<b><br><br>Virtual Adress space is:</b>"+"  "+"<b>"+vas+"</b>");
+    console.log(vas);
+    var ps = parseInt(document.getElementById("page").value);
+    $("#demo").append("<b><br><br>Page size is:</b>"+"  "+"<b>"+ps+"</b>");
+    //Page size is:
+    console.log(ps);
+	
+var psc = ps;
+console.log(psc);
+var flag=1;
+console.log(flag);
+ while (psc!=1)
+ {
+   if(psc%2!=0)
+     {
+     flag = 0;
+     break;
+     }
+   psc=psc/2;
+ }
+ console.log(flag);
+if(flag==0)
+{
+  console.log("909");
+  alert("invalid inputs exit");
+  return;
+}
+
+
+
+	var i=0;
+	while(ps!=1){
+		ps=ps/2;
+		i++;		
+	}
+	
+    console.log(i);
+	var txt = [];
+	txt= document.getElementById("ps").value;
+    var j=0;
+	if(txt[0]=='K')
+       j=10;
+    else if(txt[0]=='M')
+    	j=20;
+         else if(txt[0]=='G')
+         	j=30;
+   console.log(j);
+   var page_size=Math.pow (2,i+j);
+   console.log(page_size);
+	
+	
+	
+  if(page_size > vas)
+  {
+	  alert("Invalid inputs exit");
+    return;
+  }	 
+	
+	
+	
+	
+	
+	
+   var pte = document.getElementById("pte").value;
+   $("#demo").append("<b><br><br>Page Table Entry size:</b>"+"  "+"<b>"+pte+"</b>");
+   console.log(pte);
+   var no_pages = vas / page_size;
+   //No of pages in process is (vas/page_size):
+   $("#demo").append("<b><br><br>No of pages in process is:</b>"+"  "+"<b>"+no_pages+"</b>");
+   console.log(no_pages);
+   var size = no_pages * pte;
+   //Size of inner most page table is (no_pages * pte):
+   $("#demo").append("<b><br><br>Size of inner most page table is (no_pages * pte):</b>"+"  "+"<b>"+size+"</b>");
+   console.log(size);
+   var level=1;
+    var size1 = (size/page_size) * pte;
+	if(size1>=size)
+	{
+        //Display invalid inputs exit
+        alert("Invalid inputs exit");
+        return;
+    }    
+    while( size > page_size){
+   	size = (size / page_size) * pte ;
+   	level++;
+    //Size of PT[level] is:
+    $("#demo").append("<br><br>"+"  "+"<b>Size of level"+level+" "+"page table is"+" "+size+"</b>");
+    $("#demo").css("width","50vw");
+    $("#demo").css("margin-left","21vw");
+    $("#demo").css("background-color","#FFFF99");
+    $("#demo").css("color","black");
+    console.log(size);
+   }
+  var k = size / pte;
+  var count=0;
+  while (k!=1){
+  	k=k/2;
+  	count++;
+  } 
+var l = page_size / pte;
+//Entries present in middle page tables:
+$("#demo").append("<b><br><br>Entries present in middle page tables:</b>"+"  "+"<b>"+l+"<br>"+"</b>"+"<br>");
+console.log(l);
+var count1 = 0;
+while (l!=1){
+	l=l/2;
+	count1++;
+}
+var result = [];
+result = new Array(level+1);
+var g;
+for (g=1;g<level;g++)
+	result[g]=count1;
+result[0] = count;
+result[level] = i+j;
+var j=0;
+console.log(result);                            // for drawing table
+var $table=$("<table border='1|1'></table>");
+$table.addClass('table table-striped');
+$tbody = $("<tbody></tbody>");
+var $line =$("<tr></tr>");
+for (var i=0;i<result.length;i++){
+  var r = result[i];
+  var td = $('<td>'+r+'</td>');
+  td.css({'background-color': getRandomColor()});
+  $line.append(td)
+  $tbody.append($line);
+}
+$table.append($tbody);
+$table.appendTo($("#mydiv"));
+$("#mydiv").css("margin-left","20px");
+//for changing colour
+function getRandomColor() { 
+  j=j+1;
+  var color ='';
+    if(j==1){
+        color='Green';
+    }
+    if(j==2){
+        color='Orange';
+    }
+    if(j==3){
+        color='Yellow';
+    }
+    if(j==4){
+        color='pink';
+    }
+  
+  return color;
+}
+console.log(j);
+$('input[type="button"]').attr('disabled','disabled');
+}
+</script>

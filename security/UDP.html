@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<style>
+  #container {
+    width: 943px;
+    height: 5px;
+    position: absolute;
+    background: white;
+    /* border: #000 solid; */
+    top: 81%;
+    left: 18%;
+  }
+  #animate {
+    width: 50px;
+    height: 5px;
+    position: absolute;
+    background-color: white;
+    top: 0%;
+    left: 95%;
+    opacity: 0;
+  }
+</style>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/stroke.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/prettyPhoto.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/style.css">
+  <link rel="stylesheet" type="text/css" href="wikipages/js/syntax-highlighter/styles/shCore.css" media="all">
+  <link rel="stylesheet" type="text/css" href="wikipages/js/syntax-highlighter/styles/shThemeRDark.css" media="all">
+  <link rel="stylesheet" type="text/css" href="wikipages/css/custom.css">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <div style="background-color:#cabbe9;" class="container-fluid">
+    <div  class="panel panel-primary">
+      <div style="background-color:#8b85e9; text-align: center;" class="panel panel-heading">
+        <h1>UDP Simulation</h1>
+      </div>
+      <div class="panel panel-body">
+          <button class="btn btn-primary" type ="button", onclick ="socket()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1">socket()</button> This function shall create an unbound socket in a communications domain, and return a file descriptor that can be used in later function calls that operate on sockets.
+          <br/><br/>
+          <button id ="bind" class="btn btn-primary" type ="button", onclick ="bind()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>bind()</button> This function shall assign a local socket address address to a socket identified by descriptor socket that has no local socket address assigned.
+          <br/><br/>
+          <button id ="receive" class="btn btn-primary" type ="button", onclick ="receive()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>receive()</button> This function receives a message from a connectionless-mode socket.
+          <br/><br/>
+          <button id="send" class="btn btn-primary" type ="button", onclick ="send()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>send()</button> This function sends a message to a gived destination address through a connectionless-mode socket.
+          <br/><br/>
+          <button id ="close" class="btn btn-primary" type ="button", onclick ="closee()", style =" background-color:#58efd6; height:25px;width:125px;line-height:1" disabled>close()</button> This function closes the communication.
+      </div>
+    </div>
+
+    <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:73%;left:10%;border-radius:125px;border:1px solid #000"><b>Server</b></button>
+    <button type = "button", id ="client", name = "client", style="height:125px;width:125px;position:absolute;top:73%;left:80%;border-radius:125px;border:1px solid #000"><b>Client</b></button>
+
+    <div id ="container">
+      <div id ="animate"></div>
+    </div>
+
+    <script type ="text/javascript">
+      function socket()
+      {
+        document.getElementById("server").style.backgroundColor = '#58efd6';
+        document.getElementById("client").style.backgroundColor = '#58efd6';
+        document.getElementById("bind").disabled = false;
+      }
+
+      function bind()
+      {
+        // document.getElementById("server").style.backgroundColor = '#FA6937';
+        document.getElementById("container").style.backgroundColor = '#00FF00';
+        document.getElementById("receive").disabled = false;
+        document.getElementById("close").disabled = false;
+      }
+
+      function receive()
+      {
+        document.getElementById("animate").style.backgroundColor = '#FF0000';
+        document.getElementById("animate").style.opacity = "1.0";
+        var elem = document.getElementById("animate");
+        var pos = 943;
+        var id = setInterval(frame, 5);
+        function frame()
+        {
+          if (pos == 0) {
+            clearInterval(id);
+            document.getElementById("animate").style.backgroundColor = '#FFFFFF';
+          } else {
+            pos--;
+            elem.style.left = pos + 'px';
+          }
+        }
+        document.getElementById("send").disabled = false;
+      }
+
+      function send()
+      {
+        document.getElementById("animate").style.backgroundColor = '#0000FF'
+        document.getElementById("animate").style.opacity = "1.0";
+        var elem = document.getElementById("animate");
+        var pos = 0;
+        var id = setInterval(frame, 5);
+        function frame()
+        {
+          if (pos == 903) {
+            clearInterval(id);
+            document.getElementById("animate").style.backgroundColor = '#FFFFFF';
+          } else {
+            pos++;
+            elem.style.left = pos + 'px';
+          }
+        }
+      }
+
+      function closee()
+      {
+        document.getElementById("animate").style.backgroundColor = '#FFFFFF'
+        document.getElementById("server").style.backgroundColor = '#DCDCDC'
+        document.getElementById("client").style.backgroundColor = '#DCDCDC';
+        document.getElementById("container").style.backgroundColor = '#FFFFFF';
+        document.getElementById("bind").disabled = true;
+        document.getElementById("receive").disabled = true;
+        document.getElementById("send").disabled = true;
+        document.getElementById("close").disabled = true;
+      }
+    </script>
+  </div>
+</body>
